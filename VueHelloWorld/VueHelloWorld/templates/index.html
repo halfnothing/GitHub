@@ -1,0 +1,58 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+<!-- Add this to <head> -->
+  <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+  <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+  
+        <script src="/static/vue.js"></script>
+  <!-- Add this after vue.js -->
+  <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+  <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>        
+<!--        <script src='app.js'></script> -->
+    </head>
+    <body>
+        <div id="myCoolApp">
+            [[message]]
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Col1</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr is="mytable-row"
+                    v-for="item in table_data"
+                    v-bind:row="item"
+                    v-bind:key="item.id">
+                </tr>
+                </tbody>
+              </table>
+        </div>
+        <div id="myCoolApp"></div>
+            [[message]]
+        </div>
+<script>
+//Vue.use(bootstrapVue);
+Vue.component('mytable-row', {
+  props: ['row'],
+  template: '<tr><td scope="row">[[row.id]]</td><td>[[row.col1]]</td></tr>',
+  delimiters: ['[[',']]']
+})
+
+
+var app = new Vue({
+    el: '#myCoolApp',
+    data: {
+      message: 'Мы смогли установить и запустить Vue',
+      table_data: {{table_data|tojson}} 
+    },
+    delimiters: ['[[',']]']
+  });
+
+</script>
+
+    </body>
+</html>
